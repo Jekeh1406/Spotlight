@@ -28,8 +28,10 @@ RUN composer install --no-dev --no-scripts --no-autoloader
 COPY . .
 
 RUN composer dump-autoload --optimize --no-dev \
+    && rm -rf var/cache/* var/log/* \
     && mkdir -p var/cache var/log \
-    && chown -R www-data:www-data var/
+    && chown -R www-data:www-data var/ \
+    && chmod -R 777 var/
 
 EXPOSE 9000
 CMD ["php-fpm"]
