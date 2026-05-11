@@ -3,8 +3,6 @@
     <span class="criterion-label">{{ icon }} {{ label }}</span>
     <span class="criterion-score">{{ value }}/{{ max }}</span>
   </div>
-
-  <!-- Desktop : slider -->
   <div class="slider-container">
     <input
       type="range"
@@ -19,17 +17,5 @@
     <div class="slider-marks">
       <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
     </div>
-  </div>
-
-  <!-- Mobile : boutons -->
-  <div class="mobile-buttons">
-    @for (n of [0,1,2,3,4,5]; track n) {
-      <button
-        class="score-btn"
-        [class.active]="value === n"
-        [disabled]="disabled"
-        (click)="onButtonClick(n)"
-      >{{ n }}</button>
-    }
   </div>
 </div>
