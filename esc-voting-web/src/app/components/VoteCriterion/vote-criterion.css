@@ -103,3 +103,35 @@
   color: rgba(255, 255, 255, 0.4);
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .criterion-item {
+    padding: 0.75rem;
+  }
+
+  .criterion-label {
+    font-size: 0.85rem;
+  }
+
+  .criterion-score {
+    font-size: 1rem;
+  }
+
+  .vote-slider {
+    height: 5px;
+  }
+
+  .vote-slider::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .vote-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .slider-marks span {
+    font-size: 0.65rem;
+  }
+}
