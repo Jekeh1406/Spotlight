@@ -33,5 +33,8 @@ RUN composer dump-autoload --optimize --no-dev \
     && chown -R www-data:www-data var/ \
     && chmod -R 777 var/
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 9000
-CMD ["php-fpm"]
+ENTRYPOINT ["docker-entrypoint.sh"]
