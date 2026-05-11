@@ -22,9 +22,9 @@ final class Version20260130165209 extends AbstractMigration
         $this->addSql('CREATE TABLE vote_group_user (vote_group_id INT NOT NULL, user_id INT NOT NULL, PRIMARY KEY(vote_group_id, user_id))');
         $this->addSql('CREATE INDEX IDX_4F85F7C1B706E ON vote_group_user (vote_group_id)');
         $this->addSql('CREATE INDEX IDX_4F85F7C1A76ED395 ON vote_group_user (user_id)');
-        $this->addSql('ALTER TABLE vote_group ADD CONSTRAINT FK_3CA9260E7E3C61F9 FOREIGN KEY (owner_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE vote_group ADD CONSTRAINT FK_3CA9260E7E3C61F9 FOREIGN KEY (owner_id) REFERENCES app_user (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE vote_group_user ADD CONSTRAINT FK_4F85F7C1B706E FOREIGN KEY (vote_group_id) REFERENCES vote_group (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE vote_group_user ADD CONSTRAINT FK_4F85F7C1A76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE vote_group_user ADD CONSTRAINT FK_4F85F7C1A76ED395 FOREIGN KEY (user_id) REFERENCES app_user (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema): void

@@ -20,14 +20,14 @@ final class Version20251218074534 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
         $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
         $this->addSql('CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at)');
-        $this->addSql('ALTER TABLE "user" ADD first_name VARCHAR(30) NOT NULL');
-        $this->addSql('ALTER TABLE "user" ADD last_name VARCHAR(30) NOT NULL');
+        $this->addSql('ALTER TABLE app_user ADD first_name VARCHAR(30) NOT NULL');
+        $this->addSql('ALTER TABLE app_user ADD last_name VARCHAR(30) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('DROP TABLE messenger_messages');
-        $this->addSql('ALTER TABLE "user" DROP first_name');
-        $this->addSql('ALTER TABLE "user" DROP last_name');
+        $this->addSql('ALTER TABLE app_user DROP first_name');
+        $this->addSql('ALTER TABLE app_user DROP last_name');
     }
 }
