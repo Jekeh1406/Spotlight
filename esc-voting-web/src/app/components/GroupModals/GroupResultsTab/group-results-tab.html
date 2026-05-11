@@ -1,0 +1,39 @@
+<div class="results-tab">
+  @if (rankingData().length === 0) {
+    <div class="no-data">
+      <span class="no-data-icon">🗳️</span>
+      <p>Aucun vote dans ce groupe</p>
+    </div>
+  } @else {
+    <div class="results-list">
+      @for (item of rankingData(); track item.songId) {
+        <div
+          (click)="onSongClick(item.songId)"
+          [class.bronze]="item.rank === 3"
+          [class.gold]="item.rank === 1"
+          [class.silver]="item.rank === 2"
+          class="result-item clickable"
+        >
+          <div
+            [class.bronze]="item.rank === 3"
+            [class.gold]="item.rank === 1"
+            [class.silver]="item.rank === 2"
+            class="result-rank"
+          >
+            {{ getRankIcon(item.rank) }}
+          </div>
+          <div class="result-country">{{ item.country }}</div>
+          <div class="result-info">
+            <div class="result-artist">{{ item.artist }}</div>
+            <div class="result-song">"{{ item.title }}"</div>
+          </div>
+          <div class="result-total">
+            <span class="total-score">{{ item.score | number:'1.1-1' }}/20</span>
+            <span class="vote-count">{{ item.voteCount }} vote{{ item.voteCount > 1 ? 's' : '' }}</span>
+          </div>
+          <div class="result-arrow">›</div>
+        </div>
+      }
+    </div>
+  }
+</div>

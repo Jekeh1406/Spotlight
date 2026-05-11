@@ -1,0 +1,87 @@
+<div (click)="onBackdropClick()" [class.active]="isOpen" class="modal">
+  @if (group) {
+    <div (click)="onContentClick($event)" class="modal-content modal-large">
+      <button (click)="onClose()" class="modal-close">&times;</button>
+      <div class="modal-body">
+        <!-- Header -->
+        <div class="detail-header">
+          <div class="detail-avatar">{{ group.name.charAt(0).toUpperCase() }}</div>
+          <div class="detail-info">
+            <h2 class="detail-name">{{ group.name }}</h2>
+            <p class="detail-members-count">{{ getMemberCount(group) }} membres</p>
+          </div>
+          <div class="detail-code-badge" (click)="onCopyCode(group.code, $event)">
+            <span class="code-text">{{ group.code }}</span>
+            <span class="copy-icon">📋</span>
+          </div>
+        </div>
+
+        <!-- Members list -->
+        <div class="members-row">
+          @for (member of group.members; track member.id) {
+            <div class="member-chip" [class.owner]="member.id === group.ownerId">
+              <span class="member-chip-avatar">{{ member.firstName.charAt(0).toUpperCase() }}</span>
+              <span class="member-chip-name">{{ member.firstName }} {{ member.lastName }}</span>
+              @if (member.id === group.ownerId) {
+                <span class="owner-crown">👑</span>
+              }
+              @if (isCurrentUserOwner && member.id !== group.ownerId) {
+                <button
+                  class="member-remove-btn"
+                  (click)="onRemoveMember(group, member, $event)"
+                  title="Exclure ce membre"
+                >
+                  &times;
+                </button>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Tabs -->
+        <div class="detail-tabs">
+          <button
+            (click)="setTab('results')"
+            [class.active]="activeTab() === 'results'"
+            class="detail-tab"
+          >
+            🏆 Classement
+          </button>
+          <button
+            (click)="setTab('stats')"
+            [class.active]="activeTab() === 'stats'"
+            class="detail-tab"
+          >
+            📊 Statistiques
+          </button>
+        </div>
+
+        <!-- Tab content -->
+        <div class="tab-content">
+          @if (isLoading) {
+            <app-loading message="Chargement..." size="small" [inline]="true"></app-loading>
+          } @else {
+            @switch (activeTab()) {
+              @case ('results') {
+                <app-group-results-tab
+                  [ranking]="ranking"
+                  (songClick)="onSongClick($event)">
+                </app-group-results-tab>
+              }
+              @case ('stats') {
+                <app-group-stats-tab [stats]="stats"></app-group-stats-tab>
+              }
+            }
+          }
+        </div>
+
+        <!-- Footer actions -->
+        <div class="detail-footer">
+          <button (click)="onLeave(group)" class="detail-btn leave-btn">
+            Quitter le groupe
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

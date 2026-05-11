@@ -1,0 +1,21 @@
+<div class="criterion-item">
+  <div class="criterion-header">
+    <span class="criterion-label">{{ icon }} {{ label }}</span>
+    <span class="criterion-score">{{ value }}/{{ max }}</span>
+  </div>
+  <div class="slider-container">
+    <input
+      type="range"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      class="vote-slider"
+    >
+    <div class="slider-marks">
+      <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+    </div>
+  </div>
+</div>

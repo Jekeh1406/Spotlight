@@ -1,0 +1,81 @@
+<div class="stats-tab">
+  @if (!stats) {
+    <div class="no-data">
+      <span class="no-data-icon">📊</span>
+      <p>Aucune statistique disponible</p>
+    </div>
+  } @else {
+    <div class="stats-grid">
+      <!-- Nicest user -->
+      <div class="stat-card nice">
+        <div class="stat-icon">😇</div>
+        <div class="stat-label">Le plus gentil</div>
+        @if (stats.nicest) {
+          <div class="stat-user">{{ stats.nicest.name }}</div>
+          <div class="stat-value">Moyenne: {{ stats.nicest.averageGiven | number:'1.1-1' }}/5</div>
+        } @else {
+          <div class="stat-user">-</div>
+        }
+      </div>
+
+      <!-- Meanest user -->
+      <div class="stat-card mean">
+        <div class="stat-icon">😈</div>
+        <div class="stat-label">Le plus mechant</div>
+        @if (stats.meanest) {
+          <div class="stat-user">{{ stats.meanest.name }}</div>
+          <div class="stat-value">Moyenne: {{ stats.meanest.averageGiven | number:'1.1-1' }}/5</div>
+        } @else {
+          <div class="stat-user">-</div>
+        }
+      </div>
+
+      <!-- Most generous -->
+      <div class="stat-card generous">
+        <div class="stat-icon">🌟</div>
+        <div class="stat-label">Le plus genereux</div>
+        @if (stats.mostGenerous) {
+          <div class="stat-user">{{ stats.mostGenerous.name }}</div>
+          <div class="stat-value">Note max: {{ stats.mostGenerous.highestVote | number:'1.1-1' }}/5</div>
+        } @else {
+          <div class="stat-user">-</div>
+        }
+      </div>
+
+      <!-- Most critical -->
+      <div class="stat-card critical">
+        <div class="stat-icon">🔍</div>
+        <div class="stat-label">Le plus critique</div>
+        @if (stats.mostCritical) {
+          <div class="stat-user">{{ stats.mostCritical.name }}</div>
+          <div class="stat-value">Note min: {{ stats.mostCritical.lowestVote | number:'1.1-1' }}/5</div>
+        } @else {
+          <div class="stat-user">-</div>
+        }
+      </div>
+    </div>
+
+    <!-- Members stats -->
+    @if (stats.members && stats.members.length > 0) {
+      <div class="members-stats">
+        <h3 class="members-stats-title">Statistiques par membre</h3>
+        <div class="members-stats-list">
+          @for (member of stats.members; track member.userId) {
+            <div class="member-stat-item">
+              <div class="member-stat-avatar">{{ member.firstName.charAt(0) }}</div>
+              <div class="member-stat-info">
+                <div class="member-stat-name">{{ member.firstName }} {{ member.lastName }}</div>
+                <div class="member-stat-details">
+                  <span>Moy: {{ member.averageGiven | number:'1.1-1' }}</span>
+                  <span>Max: {{ member.highestVote | number:'1.1-1' }}</span>
+                  <span>Min: {{ member.lowestVote | number:'1.1-1' }}</span>
+                  <span>{{ member.voteCount }} votes</span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

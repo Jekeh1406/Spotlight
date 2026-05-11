@@ -1,0 +1,202 @@
+<app-navbar-component></app-navbar-component>
+
+<main class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">
+      <div class="page-title-line1">Mon</div>
+      <div class="page-title-line2">Top</div>
+    </h1>
+  </div>
+
+  @if (isLoading()) {
+    <app-loading message="Chargement de votre classement..." size="large"></app-loading>
+  } @else if (rankedSongs().length === 0) {
+    <div class="no-votes">
+      <div class="no-votes-icon">🗳️</div>
+      <div class="no-votes-text">Vous n'avez pas encore voté</div>
+      <div class="no-votes-subtext">Votez pour vos chansons préférées pour voir votre classement</div>
+    </div>
+  } @else {
+    <!-- Podium -->
+    <div class="podium-section">
+      <div class="podium">
+        <!-- 2nd place -->
+        <div class="podium-place">
+          @if (podium().second) {
+            <div [class.rank-1]="podium().second!.rank === 1" [class.rank-2]="podium().second!.rank === 2"
+                 [class.rank-3]="podium().second!.rank === 3" class="podium-card">
+              @if (podium().second!.rank === 1) {
+                <div class="podium-crown">👑</div>
+              }
+              <div class="podium-medal">{{ getMedal(podium().second!.rank) }}</div>
+              <div class="podium-flag-wrapper">
+                <img [alt]="podium().second!.country.name" [src]="podium().second!.country.flag | countryFlag"
+                     class="podium-flag">
+              </div>
+              <div class="podium-details">
+                <div class="podium-country">{{ podium().second!.country.name }}</div>
+                <div class="podium-artist">{{ podium().second!.artist }}</div>
+                <div class="podium-song">"{{ podium().second!.title }}"</div>
+              </div>
+              <div class="podium-score">
+                @if (selectedSort() === 'total') {
+                  {{ podium().second!.displayScore }}<span>/20</span>
+                } @else {
+                  {{ podium().second!.displayScore }}<span>/5</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- 1st place -->
+        <div class="podium-place">
+          @if (podium().first) {
+            <div [class.rank-1]="podium().first!.rank === 1" [class.rank-2]="podium().first!.rank === 2"
+                 [class.rank-3]="podium().first!.rank === 3" class="podium-card">
+              @if (podium().first!.rank === 1) {
+                <div class="podium-crown">👑</div>
+              }
+              <div class="podium-medal">{{ getMedal(podium().first!.rank) }}</div>
+              <div class="podium-flag-wrapper">
+                <img [alt]="podium().first!.country.name" [src]="podium().first!.country.flag | countryFlag"
+                     class="podium-flag">
+              </div>
+              <div class="podium-details">
+                <div class="podium-country">{{ podium().first!.country.name }}</div>
+                <div class="podium-artist">{{ podium().first!.artist }}</div>
+                <div class="podium-song">"{{ podium().first!.title }}"</div>
+              </div>
+              <div class="podium-score">
+                @if (selectedSort() === 'total') {
+                  {{ podium().first!.displayScore }}<span>/20</span>
+                } @else {
+                  {{ podium().first!.displayScore }}<span>/5</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- 3rd place -->
+        <div class="podium-place">
+          @if (podium().third) {
+            <div [class.rank-1]="podium().third!.rank === 1" [class.rank-2]="podium().third!.rank === 2"
+                 [class.rank-3]="podium().third!.rank === 3" class="podium-card">
+              @if (podium().third!.rank === 1) {
+                <div class="podium-crown">👑</div>
+              }
+              <div class="podium-medal">{{ getMedal(podium().third!.rank) }}</div>
+              <div class="podium-flag-wrapper">
+                <img [alt]="podium().third!.country.name" [src]="podium().third!.country.flag | countryFlag"
+                     class="podium-flag">
+              </div>
+              <div class="podium-details">
+                <div class="podium-country">{{ podium().third!.country.name }}</div>
+                <div class="podium-artist">{{ podium().third!.artist }}</div>
+                <div class="podium-song">"{{ podium().third!.title }}"</div>
+              </div>
+              <div class="podium-score">
+                @if (selectedSort() === 'total') {
+                  {{ podium().third!.displayScore }}<span>/20</span>
+                } @else {
+                  {{ podium().third!.displayScore }}<span>/5</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Full ranking list -->
+    <div class="ranking-container">
+      <h2 class="ranking-title">Classement complet</h2>
+
+      <!-- Sort filters -->
+      <div class="sort-filters">
+        @for (option of sortOptions; track option.key) {
+          <button
+            (click)="setSort(option.key)"
+            [class.active]="selectedSort() === option.key"
+            class="sort-btn">
+            <span class="sort-icon">{{ option.icon }}</span>
+            <span class="sort-label">{{ option.label }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="ranking-list">
+        @for (song of rankedSongs(); track song.id) {
+          <div (click)="openModal(song)" [class.gold]="song.rank === 1" [class.silver]="song.rank === 2" [class.bronze]="song.rank === 3" [class.top-3]="song.rank <= 3" class="ranking-item clickable">
+            <div [class.bronze]="song.rank === 3" [class.gold]="song.rank === 1" [class.silver]="song.rank === 2"
+                 class="ranking-position">
+              {{ song.rank }}
+            </div>
+            <img [alt]="song.country.name" [src]="song.country.flag | countryFlag" class="ranking-flag">
+            <div class="ranking-info">
+              <div class="ranking-artist">{{ song.artist }}</div>
+              <div class="ranking-song">"{{ song.title }}"</div>
+            </div>
+            <div class="ranking-scores">
+              <div [class.highlighted]="selectedSort() === 'voix'" class="ranking-detail">
+                🎤 {{ song.userVote!.noteVoix }}
+              </div>
+              <div [class.highlighted]="selectedSort() === 'musique'" class="ranking-detail">
+                🎵 {{ song.userVote!.noteMusique }}
+              </div>
+              <div [class.highlighted]="selectedSort() === 'miseEnScene'" class="ranking-detail">
+                🎭 {{ song.userVote!.noteMiseEnScene }}
+              </div>
+              <div [class.highlighted]="selectedSort() === 'interpretation'" class="ranking-detail">
+                ✨ {{ song.userVote!.noteInterpretation }}
+              </div>
+            </div>
+            <div class="ranking-total">
+              @if (selectedSort() === 'total') {
+                {{ song.displayScore }}/20
+              } @else {
+                {{ song.displayScore }}/5
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Unvoted songs -->
+  @if (unvotedSongs().length > 0) {
+    <div class="unvoted-container">
+      <h2 class="unvoted-title">Pas encore voté</h2>
+      <div class="unvoted-list">
+        @for (song of unvotedSongs(); track song.id) {
+          <div (click)="openModal(song)" class="unvoted-item">
+            <img [alt]="song.country.name" [src]="song.country.flag | countryFlag" class="unvoted-flag">
+            <div class="unvoted-info">
+              <div class="unvoted-artist">{{ song.artist }}</div>
+              <div class="unvoted-song">"{{ song.title }}"</div>
+            </div>
+            <div class="unvoted-country">{{ song.country.name }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</main>
+
+<!-- Vote Modal -->
+<app-vote-modal
+  (closeModal)="closeModal()"
+  (voteSubmitted)="onVoteSubmitted($event)"
+  [isOpen]="isModalOpen"
+  [song]="selectedSong"
+></app-vote-modal>
+
+<!-- Toast -->
+<div [class.show]="isToastVisible" class="toast">
+  <span class="toast-icon">✓</span>
+  <span>{{ toastMessage }}</span>
+</div>
+
+<app-footer></app-footer>

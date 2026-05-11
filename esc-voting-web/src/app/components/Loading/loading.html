@@ -1,0 +1,10 @@
+<div class="loading" [class.inline]="inline" [class.small]="size === 'small'" [class.large]="size === 'large'">
+  <div class="loading-spinner">
+    <div class="spinner-ring"></div>
+    <div class="spinner-ring"></div>
+    <div class="spinner-ring"></div>
+  </div>
+  @if (message) {
+    <span class="loading-text">{{ message }}</span>
+  }
+</div>

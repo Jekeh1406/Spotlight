@@ -1,0 +1,57 @@
+<div (click)="onBackdropClick()" [class.active]="isOpen" class="modal">
+  <button (click)="close()" aria-label="Fermer" class="modal-close">&times;</button>
+  @if (song) {
+    <div (click)="$event.stopPropagation()" class="modal-content">
+      <div [style.background-image]="song.imageUrl ? 'url(' + song.imageUrl + ')' : null" class="modal-hero">
+        <img [alt]="song.country.name" [src]="song.country.flag | countryFlag" class="modal-flag-img">
+        <div class="modal-hero-content">
+          <div class="modal-country">{{ song.country.name }}</div>
+          <div class="modal-artist">{{ song.artist }} - "{{ song.title }}"</div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-criteria">
+          <app-vote-criterion
+            (valueChange)="onCriterionChange('voice', $event)"
+            [value]="currentVote.voice"
+            icon="🎤"
+            label="Voix"
+          ></app-vote-criterion>
+
+          <app-vote-criterion
+            (valueChange)="onCriterionChange('music', $event)"
+            [value]="currentVote.music"
+            icon="🎵"
+            label="Musique"
+          ></app-vote-criterion>
+
+          <app-vote-criterion
+            (valueChange)="onCriterionChange('staging', $event)"
+            [value]="currentVote.staging"
+            icon="🎭"
+            label="Mise en scene"
+          ></app-vote-criterion>
+
+          <app-vote-criterion
+            (valueChange)="onCriterionChange('performance', $event)"
+            [value]="currentVote.performance"
+            icon="✨"
+            label="Interpretation"
+          ></app-vote-criterion>
+        </div>
+
+        <div class="modal-actions">
+          <button (click)="close()" class="modal-btn modal-btn-cancel">Annuler</button>
+          <button
+            (click)="submitVote()"
+            [disabled]="!canSubmit()"
+            class="modal-btn modal-btn-submit"
+          >
+            {{ isSubmitting() ? 'Envoi...' : (existingVote() ? 'Enregistrer' : 'Valider') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

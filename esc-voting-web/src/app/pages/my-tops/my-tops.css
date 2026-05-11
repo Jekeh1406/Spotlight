@@ -1,0 +1,1165 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: #0a0a0a;
+  position: relative;
+}
+
+:host::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(138, 43, 226, 0.12) 0%, transparent 50%),
+  radial-gradient(ellipse at 0% 100%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+  radial-gradient(ellipse at 100% 100%, rgba(0, 191, 255, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-content {
+  margin-top: 90px;
+  padding: 4rem 4rem 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.page-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.page-title-line1 {
+  display: inline-block;
+  padding-bottom: 0.05em;
+  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-title-line2 {
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* No votes state */
+.no-votes {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-votes-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.no-votes-text {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.no-votes-subtext {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+}
+
+/* Podium */
+.podium-section {
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+}
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.podium-place {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.podium-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: center;
+  width: 180px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(138, 43, 226, 0.4);
+    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.2);
+  }
+
+  &.rank-1 {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.05));
+    border-color: rgba(255, 215, 0, 0.3);
+    width: 200px;
+    padding: 2rem 1.5rem;
+
+    &:hover {
+      border-color: rgba(255, 215, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+    }
+  }
+
+  &.rank-2 {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.08), rgba(192, 192, 192, 0.03));
+    border-color: rgba(192, 192, 192, 0.25);
+    width: 180px;
+
+    &:hover {
+      border-color: rgba(192, 192, 192, 0.4);
+      box-shadow: 0 20px 40px rgba(192, 192, 192, 0.1);
+    }
+  }
+
+  &.rank-3 {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.08), rgba(205, 127, 50, 0.03));
+    border-color: rgba(205, 127, 50, 0.25);
+    width: 170px;
+
+    &:hover {
+      border-color: rgba(205, 127, 50, 0.4);
+      box-shadow: 0 20px 40px rgba(205, 127, 50, 0.1);
+    }
+  }
+}
+
+.podium-crown {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+.podium-medal {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.podium-card.rank-1 .podium-medal {
+  font-size: 3rem;
+}
+
+.podium-flag-wrapper {
+  margin-bottom: 1rem;
+}
+
+.podium-flag {
+  width: 80px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.podium-card:hover .podium-flag {
+  transform: scale(1.05);
+}
+
+.podium-card.rank-1 .podium-flag {
+  width: 100px;
+}
+
+.podium-details {
+  margin-bottom: 1rem;
+}
+
+.podium-country {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.podium-artist {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.podium-card.rank-1 .podium-artist {
+  font-size: 1.6rem;
+}
+
+.podium-song {
+  font-size: 0.85rem;
+  color: rgba(167, 139, 250, 0.7);
+  font-style: italic;
+}
+
+.podium-score {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #A78BFA;
+
+  span {
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+    opacity: 0.7;
+  }
+}
+
+.podium-card.rank-1 .podium-score {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  span {
+    -webkit-text-fill-color: #FFA500;
+  }
+}
+
+.podium-card.rank-2 .podium-score {
+  color: #C0C0C0;
+}
+
+.podium-card.rank-3 .podium-score {
+  color: #CD7F32;
+}
+
+
+/* Ranking list */
+.ranking-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ranking-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Sort filters */
+.sort-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(138, 43, 226, 0.15);
+    border-color: rgba(138, 43, 226, 0.3);
+    color: white;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(167, 139, 250, 0.2));
+    border-color: rgba(138, 43, 226, 0.5);
+    color: white;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.25);
+  }
+}
+
+.sort-icon {
+  font-size: 1rem;
+}
+
+.sort-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: 50px 60px 1fr auto 95px;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(138, 43, 226, 0.1);
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(138, 43, 226, 0.1);
+    border-color: rgba(138, 43, 226, 0.3);
+  }
+
+  &.top-3 {
+    background: rgba(138, 43, 226, 0.08);
+  }
+
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.ranking-position {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+
+  &.gold {
+    color: #FFD700;
+  }
+
+  &.silver {
+    color: #C0C0C0;
+  }
+
+  &.bronze {
+    color: #CD7F32;
+  }
+}
+
+.ranking-flag {
+  width: 50px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ranking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ranking-artist {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+}
+
+.ranking-song {
+  font-size: 0.9rem;
+  color: rgba(167, 139, 250, 0.7);
+  font-style: italic;
+}
+
+.ranking-scores {
+  display: flex;
+  gap: 1rem;
+}
+
+.ranking-detail {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &.highlighted {
+    background: rgba(138, 43, 226, 0.2);
+    color: #A78BFA;
+    font-weight: 600;
+  }
+}
+
+.ranking-total {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #A78BFA;
+  text-align: right;
+}
+
+/* Unvoted songs */
+.unvoted-container {
+  max-width: 1000px;
+  margin: 3rem auto 0;
+}
+
+.unvoted-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.unvoted-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.unvoted-item {
+  display: grid;
+  grid-template-columns: 50px 1fr auto auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateX(5px);
+
+    .vote-btn {
+      background: #EF4444;
+      color: white;
+    }
+  }
+}
+
+.unvoted-flag {
+  width: 45px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.unvoted-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.unvoted-artist {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: white;
+}
+
+.unvoted-song {
+  font-size: 0.85rem;
+  color: rgba(167, 139, 250, 0.6);
+  font-style: italic;
+}
+
+.unvoted-country {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.unvoted-action {
+  display: flex;
+  align-items: center;
+}
+
+.vote-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &.active {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: rgba(20, 20, 20, 0.98);
+  backdrop-filter: blur(20px);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(138, 43, 226, 0.25);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+  }
+}
+
+.modal-hero {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(138, 43, 226, 0.2);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 0.7) 50%, transparent 100%);
+  }
+}
+
+.modal-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  color: white;
+  z-index: 1;
+}
+
+.modal-flag-img {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 60px;
+  height: auto;
+  z-index: 1;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-country {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.modal-artist {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-body {
+  padding: 2.5rem;
+  color: white;
+}
+
+.modal-edit-badge {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-vote-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-criteria {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.modal-criteria-item {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.25rem;
+  border-left: 2px solid rgba(138, 43, 226, 0.4);
+  border-radius: 8px;
+}
+
+.modal-criteria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-criteria-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
+.modal-criteria-score {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #A78BFA;
+}
+
+.slider-container {
+  width: 100%;
+}
+
+.vote-slider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.7);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.7);
+    }
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: 8px;
+    background: linear-gradient(to right, #8B5CF6, rgba(255, 255, 255, 0.1));
+    border-radius: 4px;
+  }
+}
+
+.slider-marks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding: 0 2px;
+
+  span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+  }
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+}
+
+.modal-btn {
+  padding: 1rem;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 8px;
+}
+
+.modal-btn-cancel {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.modal-btn-submit {
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  color: white;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(20, 20, 20, 0.98);
+  backdrop-filter: blur(20px);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 3000;
+  animation: slideIn 0.4s;
+
+  &.show {
+    display: flex;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-icon {
+  font-size: 1.2rem;
+  color: #10B981;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 70px;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page-title {
+    font-size: 4rem;
+  }
+
+  .page-title-line1 {
+    font-size: 3rem;
+  }
+
+  .page-title-line2 {
+    font-size: 2rem;
+  }
+
+  .podium {
+    gap: 0.75rem;
+  }
+
+  .podium-card {
+    width: 140px;
+    padding: 1rem;
+
+    &.rank-1 {
+      width: 160px;
+      padding: 1.25rem 1rem;
+    }
+
+    &.rank-2 {
+      width: 140px;
+    }
+
+    &.rank-3 {
+      width: 130px;
+    }
+  }
+
+  .podium-crown {
+    font-size: 2rem;
+    top: -20px;
+  }
+
+  .podium-medal {
+    font-size: 2rem;
+  }
+
+  .podium-card.rank-1 .podium-medal {
+    font-size: 2.5rem;
+  }
+
+  .podium-flag {
+    width: 60px;
+  }
+
+  .podium-card.rank-1 .podium-flag {
+    width: 75px;
+  }
+
+  .podium-artist {
+    font-size: 1.1rem;
+  }
+
+  .podium-card.rank-1 .podium-artist {
+    font-size: 1.3rem;
+  }
+
+  .podium-song {
+    font-size: 0.75rem;
+  }
+
+  .podium-score {
+    font-size: 1.5rem;
+  }
+
+  .podium-card.rank-1 .podium-score {
+    font-size: 1.8rem;
+  }
+
+  .ranking-item {
+    grid-template-columns: 40px 45px 1fr 85px;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .ranking-scores {
+    display: none;
+  }
+
+  .sort-filters {
+    gap: 0.5rem;
+  }
+
+  .sort-btn {
+    padding: 0.5rem 0.9rem;
+  }
+
+  .sort-label {
+    font-size: 0.7rem;
+  }
+
+  .ranking-artist {
+    font-size: 1.1rem;
+  }
+
+  .ranking-song {
+    font-size: 0.8rem;
+  }
+
+  .ranking-total {
+    font-size: 1.2rem;
+  }
+
+  .unvoted-item {
+    grid-template-columns: 40px 1fr auto;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .unvoted-country {
+    display: none;
+  }
+
+  .unvoted-artist {
+    font-size: 1rem;
+  }
+
+  .modal {
+    padding: 1rem;
+  }
+
+  .modal-hero {
+    height: 200px;
+  }
+
+  .modal-country {
+    font-size: 1.8rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1.5rem 0.5rem 3rem;
+  }
+
+  .page-title-line1 {
+    font-size: 2.2rem;
+  }
+
+  .page-title-line2 {
+    font-size: 1.5rem;
+  }
+
+  .sort-filters {
+    gap: 0.4rem;
+  }
+
+  .sort-btn {
+    padding: 0.4rem 0.7rem;
+    gap: 0.3rem;
+  }
+
+  .sort-icon {
+    font-size: 0.9rem;
+  }
+
+  .sort-label {
+    font-size: 0.65rem;
+  }
+
+  .podium {
+    gap: 0.5rem;
+  }
+
+  .podium-card {
+    width: 100px;
+    padding: 0.75rem;
+    border-radius: 12px;
+
+    &.rank-1 {
+      width: 115px;
+      padding: 1rem 0.75rem;
+    }
+
+    &.rank-2 {
+      width: 100px;
+    }
+
+    &.rank-3 {
+      width: 95px;
+    }
+  }
+
+  .podium-crown {
+    font-size: 1.5rem;
+    top: -15px;
+  }
+
+  .podium-medal {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .podium-card.rank-1 .podium-medal {
+    font-size: 1.8rem;
+  }
+
+  .podium-flag-wrapper {
+    margin-bottom: 0.5rem;
+  }
+
+  .podium-flag {
+    width: 45px;
+  }
+
+  .podium-card.rank-1 .podium-flag {
+    width: 55px;
+  }
+
+  .podium-country {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+  }
+
+  .podium-artist {
+    font-size: 0.85rem;
+  }
+
+  .podium-card.rank-1 .podium-artist {
+    font-size: 1rem;
+  }
+
+  .podium-song {
+    font-size: 0.65rem;
+    display: none;
+  }
+
+  .podium-details {
+    margin-bottom: 0.5rem;
+  }
+
+  .podium-score {
+    font-size: 1.2rem;
+
+    span {
+      font-size: 0.7rem;
+    }
+  }
+
+  .podium-card.rank-1 .podium-score {
+    font-size: 1.4rem;
+  }
+
+  .podium-place.first .podium-stand {
+    height: 70px;
+    width: 115px;
+  }
+
+  .podium-place.second .podium-stand {
+    height: 50px;
+    width: 100px;
+  }
+
+  .podium-place.third .podium-stand {
+    height: 35px;
+    width: 100px;
+  }
+
+  .stand-number {
+    font-size: 1.5rem;
+  }
+
+  .ranking-item {
+    grid-template-columns: 35px 40px 1fr 75px;
+    gap: 0.75rem;
+    padding: 0.85rem;
+  }
+
+  .ranking-position {
+    font-size: 1.2rem;
+  }
+
+  .ranking-flag {
+    width: 40px;
+  }
+
+  .ranking-artist {
+    font-size: 1rem;
+  }
+
+  .ranking-song {
+    font-size: 0.75rem;
+  }
+
+  .ranking-total {
+    font-size: 1rem;
+  }
+}

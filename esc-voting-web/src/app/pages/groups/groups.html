@@ -1,0 +1,165 @@
+<app-navbar-component></app-navbar-component>
+
+<main class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">
+      <div class="page-title-line1">Mes</div>
+      <div class="page-title-line2">Groupes</div>
+    </h1>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="actions">
+    <button (click)="openCreateModal()" class="action-btn create-btn">
+      <span class="btn-icon">+</span>
+      <span>Creer un groupe</span>
+    </button>
+    <button (click)="openJoinModal()" class="action-btn join-btn">
+      <span class="btn-icon">&#x2192;</span>
+      <span>Rejoindre</span>
+    </button>
+  </div>
+
+  <!-- Groups list -->
+  @if (isLoading()) {
+    <app-loading message="Chargement des groupes..." size="large"></app-loading>
+  } @else if (groups().length === 0) {
+    <div class="no-groups">
+      <div class="no-groups-icon">👥</div>
+      <div class="no-groups-text">Aucun groupe</div>
+      <div class="no-groups-subtext">Creez ou rejoignez un groupe pour partager vos votes</div>
+    </div>
+  } @else {
+    <div class="groups-grid">
+      @for (group of groups(); track group.id) {
+        <div class="group-card" (click)="openGroupDetail(group)">
+          <div class="group-card-header">
+            <div class="group-avatar">{{ group.name.charAt(0).toUpperCase() }}</div>
+            <div class="group-info">
+              <div class="group-name">{{ group.name }}</div>
+              <div class="group-members">{{ getMemberCount(group) }} membre{{ getMemberCount(group) > 1 ? 's' : '' }}</div>
+            </div>
+          </div>
+          <div class="group-card-footer">
+            <div class="group-code">
+              <span class="code-label">Code:</span>
+              <span class="code-value">{{ group.code }}</span>
+            </div>
+            <span class="group-arrow">›</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</main>
+
+<!-- Create Group Modal -->
+<div (click)="closeCreateModal()" [class.active]="isCreateModalOpen()" class="modal">
+  <div (click)="$event.stopPropagation()" class="modal-content modal-small">
+    <button (click)="closeCreateModal()" class="modal-close">&times;</button>
+    <div class="modal-body">
+      <div class="modal-icon">➕</div>
+      <h2 class="modal-title">Creer un groupe</h2>
+      <p class="modal-subtitle">Invitez vos amis avec le code genere</p>
+
+      <div class="form-group">
+        <label class="form-label">Nom du groupe</label>
+        <input
+          type="text"
+          [(ngModel)]="newGroupName"
+          placeholder="Ex: Les fans de l'Eurovision"
+          class="form-input"
+          maxlength="50"
+        >
+      </div>
+
+      <div class="modal-actions">
+        <button (click)="closeCreateModal()" class="modal-btn modal-btn-cancel">Annuler</button>
+        <button
+          (click)="createGroup()"
+          [disabled]="!newGroupName.trim() || isSubmitting()"
+          class="modal-btn modal-btn-submit"
+        >
+          {{ isSubmitting() ? 'Creation...' : 'Creer' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Join Group Modal -->
+<div (click)="closeJoinModal()" [class.active]="isJoinModalOpen()" class="modal">
+  <div (click)="$event.stopPropagation()" class="modal-content modal-small">
+    <button (click)="closeJoinModal()" class="modal-close">&times;</button>
+    <div class="modal-body">
+      <div class="modal-icon">🔗</div>
+      <h2 class="modal-title">Rejoindre un groupe</h2>
+      <p class="modal-subtitle">Entrez le code fourni par l'administrateur</p>
+
+      <div class="form-group">
+        <label class="form-label">Code du groupe</label>
+        <input
+          type="text"
+          [(ngModel)]="joinCode"
+          placeholder="Ex: ABC123"
+          class="form-input code-input"
+          maxlength="10"
+        >
+      </div>
+
+      <div class="modal-actions">
+        <button (click)="closeJoinModal()" class="modal-btn modal-btn-cancel">Annuler</button>
+        <button
+          (click)="joinGroup()"
+          [disabled]="!joinCode.trim() || isSubmitting()"
+          class="modal-btn modal-btn-submit"
+        >
+          {{ isSubmitting() ? 'Connexion...' : 'Rejoindre' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Group Detail Modal -->
+<app-group-detail-modal
+  [isOpen]="isGroupDetailOpen()"
+  [group]="selectedGroup()"
+  [ranking]="groupRanking()"
+  [stats]="groupStats()"
+  [isLoading]="isLoadingDetails()"
+  [isCurrentUserOwner]="selectedGroup() ? isCurrentUserOwner(selectedGroup()!) : false"
+  (close)="closeGroupDetail()"
+  (leave)="leaveGroup($event)"
+  (copyCode)="copyCode($event)"
+  (removeMember)="onRemoveMember($event)"
+  (songClick)="openSongVotesModal($event)">
+</app-group-detail-modal>
+
+<!-- Song Votes Modal -->
+<app-song-votes-modal
+  [isOpen]="isSongVotesModalOpen()"
+  [data]="songVotesData()"
+  [isLoading]="isLoadingSongVotes()"
+  (close)="closeSongVotesModal()">
+</app-song-votes-modal>
+
+<!-- Toast -->
+<div [class.show]="isToastVisible()" [class.error]="toastType() === 'error'" class="toast">
+  <span class="toast-icon">{{ toastType() === 'success' ? '✓' : '✗' }}</span>
+  <span>{{ toastMessage() }}</span>
+</div>
+
+<!-- Confirm Modal -->
+<app-confirm-modal
+  [isOpen]="isConfirmModalOpen()"
+  [title]="confirmModalConfig().title"
+  [message]="confirmModalConfig().message"
+  [icon]="confirmModalConfig().icon"
+  [type]="confirmModalConfig().type"
+  [confirmText]="confirmModalConfig().confirmText"
+  (confirm)="onConfirmModalConfirm()"
+  (cancel)="onConfirmModalCancel()"
+></app-confirm-modal>
+
+<app-footer></app-footer>

@@ -1,0 +1,125 @@
+<app-navbar-component></app-navbar-component>
+
+<div class="profile-page">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="avatar">
+        {{ user()?.firstName?.charAt(0) || 'U' }}
+      </div>
+      <h1>Mon Profil</h1>
+      <p>Gerez vos informations personnelles</p>
+    </div>
+
+    <div class="profile-sections">
+      <!-- Section Informations personnelles -->
+      <div class="profile-section">
+        <h2>Informations personnelles</h2>
+
+        <form (ngSubmit)="updateProfile()" [formGroup]="profileForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Prénom</label>
+              <input
+                formControlName="firstName"
+                id="firstName"
+                placeholder="Votre prenom"
+                type="text"
+              />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input
+                formControlName="lastName"
+                id="lastName"
+                placeholder="Votre nom"
+                type="text"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input
+              formControlName="email"
+              id="email"
+              placeholder="votre@email.com"
+              type="email"
+            />
+          </div>
+
+          <button [disabled]="isLoadingProfile() || !hasProfileChanges()" class="btn-primary" type="submit">
+            @if (isLoadingProfile()) {
+              <span class="spinner"></span>
+              Enregistrement...
+            } @else {
+              Enregistrer les modifications
+            }
+          </button>
+        </form>
+      </div>
+
+      <!-- Section Mot de passe -->
+      <div class="profile-section">
+        <h2>Changer le mot de passe</h2>
+
+        <form (ngSubmit)="updatePassword()" [formGroup]="passwordForm">
+          <div class="form-group">
+            <label for="currentPassword">Mot de passe actuel</label>
+            <input
+              formControlName="currentPassword"
+              id="currentPassword"
+              placeholder="Votre mot de passe actuel"
+              type="password"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input
+              formControlName="newPassword"
+              id="newPassword"
+              placeholder="Entrez votre nouveau mot de passe"
+              type="password"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+            <input
+              formControlName="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirmez votre nouveau mot de passe"
+              type="password"
+            />
+          </div>
+
+          <app-password-rules
+            (validChange)="onPasswordValidChange($event)"
+            [confirmPassword]="passwordForm.get('confirmPassword')?.value"
+            [currentPassword]="passwordForm.get('currentPassword')?.value"
+            [password]="passwordForm.get('newPassword')?.value"
+            [showDifferentRule]="true">
+          </app-password-rules>
+
+          <button [disabled]="isLoadingPassword() || !isPasswordValid()" class="btn-secondary" type="submit">
+            @if (isLoadingPassword()) {
+              <span class="spinner"></span>
+              Modification...
+            } @else {
+              Changer le mot de passe
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+@if (isToastVisible()) {
+  <div [class.error]="toastType() === 'error'" [class.success]="toastType() === 'success'" class="toast">
+    {{ toastMessage() }}
+  </div>
+}
+
+<app-footer></app-footer>

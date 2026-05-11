@@ -1,0 +1,54 @@
+<app-floating-particles></app-floating-particles>
+
+<div class="register-container">
+  <div class="logo">
+    <h1>Creer un compte</h1>
+    <p>Rejoignez Spotlight</p>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error-banner">{{ errorMessage }}</div>
+  }
+
+  <form (ngSubmit)="register()" [formGroup]="registerForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">Prénom</label>
+        <input formControlName="firstName" id="firstName" placeholder="Jean" type="text">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Nom</label>
+        <input formControlName="lastName" id="lastName" placeholder="Dupont" type="text">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Adresse email</label>
+      <input formControlName="email" id="email" placeholder="votre@email.com" type="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input formControlName="password" id="password" placeholder="8 caracteres minimum" type="password">
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmer le mot de passe</label>
+      <input formControlName="confirmPassword" id="confirmPassword" placeholder="••••••••" type="password">
+    </div>
+
+    <app-password-rules
+      (validChange)="onPasswordValidChange($event)"
+      [confirmPassword]="registerForm.get('confirmPassword')?.value"
+      [password]="registerForm.get('password')?.value"
+      [showDifferentRule]="false">
+    </app-password-rules>
+
+    <button [disabled]="!registerForm.valid || !isPasswordValid" class="btn-primary" type="submit">S'inscrire</button>
+  </form>
+
+  <div class="footer-links">
+    <span class="footer-text">Deja un compte ?</span>
+    <a routerLink="/login">Se connecter</a>
+  </div>
+</div>

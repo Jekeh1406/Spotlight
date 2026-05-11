@@ -1,0 +1,75 @@
+<div (click)="onBackdropClick()" [class.active]="isOpen" class="modal">
+  <div (click)="onContentClick($event)" class="modal-content modal-medium">
+    <button (click)="onClose()" class="modal-close">&times;</button>
+    <div class="modal-body">
+      @if (isLoading) {
+        <app-loading message="Chargement des votes..." size="medium"></app-loading>
+      } @else if (data) {
+        <!-- Song header -->
+        <div class="song-votes-header">
+          @if (data.song.imageUrl) {
+            <img [src]="data.song.imageUrl" [alt]="data.song.artist" class="song-votes-image">
+          } @else {
+            <div class="song-votes-icon">🎵</div>
+          }
+          <div class="song-votes-info">
+            <h2 class="song-votes-title">{{ data.song.title }}</h2>
+            <p class="song-votes-artist">{{ data.song.artist }} - {{ data.song.country }}</p>
+          </div>
+        </div>
+
+        <div class="song-votes-summary">
+          <span class="summary-label">{{ data.voteCount }} vote{{ data.voteCount > 1 ? 's' : '' }}</span>
+        </div>
+
+        <!-- Votes list -->
+        @if (data.votes.length === 0) {
+          <div class="no-data">
+            <span class="no-data-icon">🗳️</span>
+            <p>Aucun vote pour cette chanson</p>
+          </div>
+        } @else {
+          <div class="votes-list">
+            @for (vote of data.votes; track vote.voteId) {
+              <div class="vote-item">
+                <div class="vote-user">
+                  <div class="vote-user-avatar">{{ vote.firstName.charAt(0) }}</div>
+                  <div class="vote-user-name">{{ vote.firstName }} {{ vote.lastName }}</div>
+                </div>
+                <div class="vote-details">
+                  <div class="vote-criteria">
+                    <div class="vote-criterion">
+                      <span class="criterion-icon">🎤</span>
+                      <span class="criterion-value">{{ vote.noteVoix | number:'1.1-1' }}</span>
+                    </div>
+                    <div class="vote-criterion">
+                      <span class="criterion-icon">🎵</span>
+                      <span class="criterion-value">{{ vote.noteMusique | number:'1.1-1' }}</span>
+                    </div>
+                    <div class="vote-criterion">
+                      <span class="criterion-icon">🎭</span>
+                      <span class="criterion-value">{{ vote.noteMiseEnScene | number:'1.1-1' }}</span>
+                    </div>
+                    <div class="vote-criterion">
+                      <span class="criterion-icon">✨</span>
+                      <span class="criterion-value">{{ vote.noteInterpretation | number:'1.1-1' }}</span>
+                    </div>
+                  </div>
+                  <div class="vote-total">
+                    <span class="total-label">Total</span>
+                    <span class="total-value">{{ getTotalScore(vote) | number:'1.1-1' }}</span>
+                    <span class="average-value">(moy: {{ vote.average | number:'1.1-1' }})</span>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="modal-actions single">
+          <button (click)="onClose()" class="modal-btn modal-btn-submit">Fermer</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

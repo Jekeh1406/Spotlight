@@ -1,0 +1,112 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #0a0a0a; }
+
+
+:root {
+--color-purple: #8B5CF6;
+  --color-purple-light: #A78BFA;
+  --color-purple-dark: #7C3AED;
+  --color-pink: #FF1493;
+  --color-blue: #00BFFF;
+
+--color-dark: #0a0a0a;
+  --color-dark-light: #141414;
+  --color-dark-lighter: #1a1a1a;
+
+--opacity-low: 0.08;
+  --opacity-medium: 0.15;
+  --opacity-high: 0.25;
+
+--spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+
+--radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 50px;
+
+--shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 60px rgba(138, 43, 246, 0.15);
+
+--transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+--font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Crimson Pro', serif;
+
+--z-dropdown: 100;
+  --z-navbar: 1000;
+  --z-modal: 2000;
+  --z-toast: 3000;
+}
+
+/* Global responsive utilities */
+.hide-mobile {
+  display: block;
+}
+
+.show-mobile {
+  display: none;
+}
+
+/* Responsive typography and spacing */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Touch-friendly elements */
+@media (max-width: 768px) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

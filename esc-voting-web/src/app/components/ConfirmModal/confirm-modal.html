@@ -1,0 +1,11 @@
+<div (click)="onBackdropClick()" [class.active]="isOpen" class="modal-overlay">
+  <div (click)="$event.stopPropagation()" class="modal-container" [class.danger]="type === 'danger'" [class.warning]="type === 'warning'">
+    <div class="modal-icon">{{ icon }}</div>
+    <h3 class="modal-title">{{ title }}</h3>
+    <p class="modal-message">{{ message }}</p>
+    <div class="modal-actions">
+      <button (click)="onCancel()" class="btn btn-cancel">{{ cancelText }}</button>
+      <button (click)="onConfirm()" class="btn btn-confirm" [class.danger]="type === 'danger'" [class.warning]="type === 'warning'">{{ confirmText }}</button>
+    </div>
+  </div>
+</div>

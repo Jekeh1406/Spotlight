@@ -1,0 +1,240 @@
+.list-item {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr 1fr auto;
+  align-items: center;
+  padding: 2.5rem 3rem;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.12);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(90deg, rgba(138, 43, 226, 0.15), rgba(167, 139, 250, 0.1));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #8B5CF6, #A78BFA);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover {
+    padding-left: 3.5rem;
+
+    &::before {
+      width: 100%;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    .item-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.item-flag {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flag-img {
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item-info {
+  position: relative;
+  z-index: 1;
+}
+
+.item-artist {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  letter-spacing: -1px;
+  color: white;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.item-country {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  padding-top: 0.25rem;
+}
+
+.item-song {
+  font-size: 0.95rem;
+  color: rgba(167, 139, 250, 0.8);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  justify-self: center;
+  max-width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.item-status {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  justify-self: end;
+}
+
+.status-voted {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-not-voted {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.list-item.voted {
+  &::after {
+    background: linear-gradient(180deg, #10B981, #34D399);
+    opacity: 0.6;
+  }
+}
+
+.item-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+  padding-left: 2rem;
+}
+
+.item-arrow {
+  font-size: 1.3rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s;
+  color: #A78BFA;
+  margin-right: 1rem;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .list-item {
+    grid-template-columns: 50px 1fr auto auto;
+    padding: 1.5rem 1.25rem;
+    gap: 0.75rem;
+
+    &:hover {
+      padding-left: 1.5rem;
+    }
+  }
+
+  .flag-img {
+    width: 42px;
+  }
+
+  .item-artist {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .item-country {
+    font-size: 0.8rem;
+  }
+
+  .item-song {
+    display: none;
+  }
+
+  .status-voted,
+  .status-not-voted {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .item-action {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-item {
+    grid-template-columns: 40px 1fr auto;
+    padding: 1.1rem 1rem;
+
+    &:hover {
+      padding-left: 1.1rem;
+    }
+  }
+
+  .flag-img {
+    width: 34px;
+  }
+
+  .item-artist {
+    font-size: 1.2rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .item-country {
+    font-size: 0.72rem;
+  }
+
+  .item-song {
+    display: none;
+  }
+
+  .status-voted,
+  .status-not-voted {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+  }
+}

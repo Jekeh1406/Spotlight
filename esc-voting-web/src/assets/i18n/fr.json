@@ -1,0 +1,12 @@
+{
+  "APP": {
+    "TITLE": "ESC Voting",
+    "WELCOME": "Bienvenue sur l'application de vote Eurovision"
+  },
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "EMAIL": "Email",
+    "PASSWORD": "Mot de passe",
+    "SUBMIT": "Soummettre"
+  }
+}

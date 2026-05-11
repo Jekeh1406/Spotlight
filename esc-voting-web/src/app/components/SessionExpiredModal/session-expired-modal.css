@@ -1,0 +1,126 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: rgba(20, 20, 20, 0.98);
+  backdrop-filter: blur(20px);
+  max-width: 400px;
+  width: 100%;
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(138, 43, 226, 0.25);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(138, 43, 226, 0.1),
+    0 0 60px rgba(138, 43, 246, 0.15);
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-icon {
+  color: #F59E0B;
+  margin-bottom: 1.5rem;
+}
+
+.modal-icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+.modal-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  padding-bottom: 0.1em;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-message {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 1.2rem;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  color: white;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+
+  .modal-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-message {
+    font-size: 0.9rem;
+  }
+
+  .modal-btn {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+}

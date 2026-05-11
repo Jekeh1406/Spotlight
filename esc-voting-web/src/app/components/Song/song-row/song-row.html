@@ -1,0 +1,20 @@
+<div class="list-item" [class.voted]="isVoted" (click)="onRowClick()">
+  <div class="item-flag">
+    <img [src]="song.country.flag | countryFlag" [alt]="song.country.name" class="flag-img">
+  </div>
+  <div class="item-info">
+    <div class="item-artist">{{ song.artist }}</div>
+    <div class="item-country">{{ song.country.name }}</div>
+  </div>
+  <div class="item-song">"{{ song.title }}"</div>
+  <div class="item-status">
+    @if (isVoted) {
+      <span class="status-voted">Voté</span>
+    } @else {
+      <span class="status-not-voted">Pas voté</span>
+    }
+  </div>
+  <div class="item-action">
+    <span class="item-arrow">→</span>
+  </div>
+</div>

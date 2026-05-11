@@ -1,0 +1,82 @@
+{
+	"root": true,
+	"ignorePatterns": [
+		"projects/**/*"
+	],
+	"overrides": [
+		{
+			"files": [
+				"*.ts"
+			],
+			"extends": [
+				"eslint:recommended",
+				"plugin:@typescript-eslint/recommended",
+				"plugin:@angular-eslint/recommended",
+				"plugin:@angular-eslint/template/process-inline-templates"
+			],
+			"rules": {
+				"no-mixed-spaces-and-tabs": 0,
+				"semi": [
+					"error",
+					"always"
+				],
+				"@angular-eslint/directive-selector": [
+					"error",
+					{
+						"type": "attribute",
+						"prefix": "app",
+						"style": "camelCase"
+					}
+				],
+				"@angular-eslint/component-selector": [
+					"error",
+					{
+						"type": "element",
+						"prefix": "app",
+						"style": "kebab-case"
+					}
+				],
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^_",
+						"varsIgnorePattern": "^_",
+						"caughtErrorsIgnorePattern": "^_"
+					}
+				]
+			}
+		},
+		{
+			"files": [
+				"*.html"
+			],
+			"extends": [
+				"plugin:@angular-eslint/template/recommended",
+				"plugin:@angular-eslint/template/accessibility",
+				"eslint:recommended",
+				"plugin:prettier/recommended"
+			],
+			"rules": {
+				"@angular-eslint/template/prefer-control-flow": [
+					"error"
+				]
+			}
+		},
+		{
+			"files": [
+				"*"
+			],
+			"rules": {
+				"@typescript-eslint/no-explicit-any": "off"
+			}
+		},
+		{
+			"files": [
+				"./src/app/shared/utils/*.ts"
+			],
+			"rules": {
+				"@typescript-eslint/no-unused-vars": "off"
+			}
+		}
+	]
+}

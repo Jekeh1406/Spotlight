@@ -1,0 +1,129 @@
+<nav class="navbar">
+  <div class="nav-content">
+    <div class="logo">Spotlight</div>
+
+    <!-- Desktop nav pills -->
+    <div class="nav-pills desktop-only">
+      <a
+        (click)="navigate('vote'); setActiveTab(TAB.VOTE); $event.preventDefault()"
+        [class.active]="activeTab() === TAB.VOTE"
+        class="nav-pill"
+        href="#"
+      >
+        Voter
+      </a>
+
+      <a
+        (click)="navigate('groups'); setActiveTab(TAB.GROUPS); $event.preventDefault()"
+        [class.active]="activeTab() === TAB.GROUPS"
+        class="nav-pill"
+        href="#"
+      >
+        Groupes
+      </a>
+
+      <a
+        (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); $event.preventDefault()"
+        [class.active]="activeTab() === TAB.MY_TOPS"
+        class="nav-pill"
+        href="#"
+      >
+        Mon top
+      </a>
+    </div>
+
+    <!-- Desktop user menu -->
+    <div (clickOutside)="closeUserMenu()" class="user-menu desktop-only">
+      <button (click)="toggleUserMenu()" class="user-button">
+        <div class="user-avatar">{{ this.userService.getInitials() }}</div>
+        <span class="user-name">{{ this.userService.getFirstName() }}</span>
+        <svg [class.open]="isUserMenuOpen" class="chevron" fill="none" height="6" viewBox="0 0 10 6" width="10">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.5"/>
+        </svg>
+      </button>
+
+      <div [class.active]="isUserMenuOpen" class="user-dropdown">
+        <a (click)="navigate('profile'); $event.preventDefault()" class="dropdown-item" href="#">
+          <span class="dropdown-icon">👤</span>
+          <span>Mon compte</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a (click)="logout(); $event.preventDefault()" class="dropdown-item logout" href="#">
+          <span class="dropdown-icon">🚪</span>
+          <span>Se deconnecter</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile hamburger button -->
+    <button (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" class="hamburger mobile-only">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div (click)="closeMobileMenu()" [class.active]="isMobileMenuOpen" class="mobile-menu-overlay"></div>
+
+<!-- Mobile menu -->
+<div [class.active]="isMobileMenuOpen" class="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="mobile-user-info">
+      <div class="mobile-user-avatar">{{ this.userService.getInitials() }}</div>
+      <div class="mobile-user-details">
+        <div class="mobile-user-name">{{ this.userService.getFullName() }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu-nav">
+    <a
+      (click)="navigate('vote'); setActiveTab(TAB.VOTE); closeMobileMenu(); $event.preventDefault()"
+      [class.active]="activeTab() === TAB.VOTE"
+      class="mobile-nav-item"
+      href="#"
+    >
+      <span class="mobile-nav-icon">🗳️</span>
+      <span>Voter</span>
+    </a>
+
+    <a
+      (click)="navigate('groups'); setActiveTab(TAB.GROUPS); closeMobileMenu(); $event.preventDefault()"
+      [class.active]="activeTab() === TAB.GROUPS"
+      class="mobile-nav-item"
+      href="#"
+    >
+      <span class="mobile-nav-icon">👥</span>
+      <span>Groupes</span>
+    </a>
+
+    <a
+      (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); closeMobileMenu(); $event.preventDefault()"
+      [class.active]="activeTab() === TAB.MY_TOPS"
+      class="mobile-nav-item"
+      href="#"
+    >
+      <span class="mobile-nav-icon">🏆</span>
+      <span>Mon top</span>
+    </a>
+  </div>
+
+  <div class="mobile-menu-divider"></div>
+
+  <div class="mobile-menu-actions">
+    <a (click)="navigate('profile'); closeMobileMenu(); $event.preventDefault()" class="mobile-nav-item" href="#">
+      <span class="mobile-nav-icon">👤</span>
+      <span>Mon compte</span>
+    </a>
+  </div>
+
+  <div class="mobile-menu-footer">
+    <button (click)="logout(); closeMobileMenu()" class="mobile-logout-btn">
+      <span class="mobile-nav-icon">🚪</span>
+      <span>Se deconnecter</span>
+    </button>
+  </div>
+</div>
