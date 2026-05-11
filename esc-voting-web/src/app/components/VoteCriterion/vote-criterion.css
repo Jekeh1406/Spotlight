@@ -118,17 +118,17 @@
   }
 
   .vote-slider {
-    height: 4px;
+    height: 2px;
   }
 
   .vote-slider::-webkit-slider-thumb {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
   }
 
   .vote-slider::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
   }
 
   .slider-marks span {
