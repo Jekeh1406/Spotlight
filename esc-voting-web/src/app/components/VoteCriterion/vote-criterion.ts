@@ -22,4 +22,10 @@ export class VoteCriterionComponent {
     const newValue = parseFloat(target.value);
     this.valueChange.emit(newValue);
   }
+
+  onButtonClick(n: number): void {
+    if (!this.disabled) {
+      this.valueChange.emit(n);
+    }
+  }
 }
