@@ -14,11 +14,12 @@
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1.5rem;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 // Logo
@@ -45,10 +46,7 @@
   background: none;
   border: none;
   padding: 0;
-  flex: 1;
-  min-width: 0;
   justify-content: center;
-  overflow: hidden;
 }
 
 .nav-pill {
@@ -79,7 +77,8 @@
 // User menu
 .user-menu {
   flex-shrink: 0;
-  position: relative;
+  position: absolute;
+  right: 0;
 }
 
 .user-button {
