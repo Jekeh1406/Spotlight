@@ -26,7 +26,7 @@ final class SongController extends AbstractController
     #[Route('/api/songs', name: 'list_songs', methods: ['GET'])]
     public function list(SongRepository $songRepository): JsonResponse
     {
-        $songs = $songRepository->findAll();
+        $songs = $songRepository->findBy([], ['order' => 'ASC']);
         $user = $this->getUser();
 
         return new JsonResponse(
