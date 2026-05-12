@@ -16,4 +16,12 @@ class SongRepository extends ServiceEntityRepository
         parent::__construct($registry, Song::class);
     }
 
+    public function findAllOrderedByOrder(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.order', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
