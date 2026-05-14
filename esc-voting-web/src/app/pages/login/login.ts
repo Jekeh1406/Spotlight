@@ -16,6 +16,7 @@ import {FloatingParticlesComponent} from '../../components/animations/floating-p
 export class Login implements OnInit {
   loginFormGroup!: FormGroup;
   errorMessage = signal<string | null>(null);
+  showPassword = false;
 
   constructor(private router: Router,
               private authService: AuthService,) {

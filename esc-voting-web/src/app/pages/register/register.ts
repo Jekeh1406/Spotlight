@@ -16,6 +16,8 @@ export class Register implements OnInit {
   registerForm!: FormGroup;
   errorMessage = '';
   isPasswordValid = false;
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private router: Router,

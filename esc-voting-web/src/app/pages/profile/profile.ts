@@ -23,6 +23,10 @@ export class Profile implements OnInit {
   profileForm!: FormGroup;
   passwordForm!: FormGroup;
 
+  showCurrentPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
+
   user = signal<User | null>(null);
   isLoadingProfile = signal(false);
   isLoadingPassword = signal(false);
