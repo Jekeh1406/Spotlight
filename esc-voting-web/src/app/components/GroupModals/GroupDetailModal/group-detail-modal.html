@@ -7,7 +7,29 @@
         <div class="detail-header">
           <div class="detail-avatar">{{ group.name.charAt(0).toUpperCase() }}</div>
           <div class="detail-info">
-            <h2 class="detail-name">{{ group.name }}</h2>
+            @if (!isRenaming()) {
+              <div class="detail-name-row">
+                <h2 class="detail-name">{{ group.name }}</h2>
+                @if (isCurrentUserOwner) {
+                  <button class="rename-icon-btn" (click)="startRename(group)" title="Renommer le groupe">✏️</button>
+                }
+              </div>
+            } @else {
+              <div class="rename-form">
+                <input
+                  class="rename-input"
+                  type="text"
+                  [(ngModel)]="renameValue"
+                  (keyup.enter)="submitRename(group)"
+                  (keyup.escape)="cancelRename()"
+                  maxlength="50"
+                >
+                <div class="rename-actions">
+                  <button class="rename-btn rename-btn-cancel" (click)="cancelRename()">✕</button>
+                  <button class="rename-btn rename-btn-confirm" (click)="submitRename(group)" [disabled]="!renameValue.trim()">✓</button>
+                </div>
+              </div>
+            }
             <p class="detail-members-count">{{ getMemberCount(group) }} membres</p>
           </div>
           <div class="detail-code-badge" (click)="onCopyCode(group.code, $event)">

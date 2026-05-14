@@ -12,7 +12,7 @@
         <div class="stat-label">Le plus gentil</div>
         @if (stats.nicest) {
           <div class="stat-user">{{ stats.nicest.name }}</div>
-          <div class="stat-value">Moyenne: {{ stats.nicest.averageGiven | number:'1.1-1' }}/5</div>
+          <div class="stat-value">Moyenne: {{ stats.nicest.averageGiven | number:'1.1-1' }}/20</div>
         } @else {
           <div class="stat-user">-</div>
         }
@@ -24,7 +24,7 @@
         <div class="stat-label">Le plus mechant</div>
         @if (stats.meanest) {
           <div class="stat-user">{{ stats.meanest.name }}</div>
-          <div class="stat-value">Moyenne: {{ stats.meanest.averageGiven | number:'1.1-1' }}/5</div>
+          <div class="stat-value">Moyenne: {{ stats.meanest.averageGiven | number:'1.1-1' }}/20</div>
         } @else {
           <div class="stat-user">-</div>
         }
@@ -36,7 +36,7 @@
         <div class="stat-label">Le plus genereux</div>
         @if (stats.mostGenerous) {
           <div class="stat-user">{{ stats.mostGenerous.name }}</div>
-          <div class="stat-value">Note max: {{ stats.mostGenerous.highestVote | number:'1.1-1' }}/5</div>
+          <div class="stat-value">Note max: {{ stats.mostGenerous.highestVote | number:'1.1-1' }}/20</div>
         } @else {
           <div class="stat-user">-</div>
         }
@@ -48,7 +48,7 @@
         <div class="stat-label">Le plus critique</div>
         @if (stats.mostCritical) {
           <div class="stat-user">{{ stats.mostCritical.name }}</div>
-          <div class="stat-value">Note min: {{ stats.mostCritical.lowestVote | number:'1.1-1' }}/5</div>
+          <div class="stat-value">Note min: {{ stats.mostCritical.lowestVote | number:'1.1-1' }}/20</div>
         } @else {
           <div class="stat-user">-</div>
         }

@@ -3,14 +3,13 @@
     <!-- Desktop nav pills -->
     <div class="nav-pills desktop-only">
       <a
-        (click)="navigate('vote'); setActiveTab(TAB.VOTE); $event.preventDefault()"
-        [class.active]="activeTab() === TAB.VOTE"
+        (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); $event.preventDefault()"
+        [class.active]="activeTab() === TAB.MY_TOPS"
         class="nav-pill"
         href="#"
       >
-        Voter
+        Mon top
       </a>
-
       <a
         (click)="navigate('groups'); setActiveTab(TAB.GROUPS); $event.preventDefault()"
         [class.active]="activeTab() === TAB.GROUPS"
@@ -21,14 +20,6 @@
       </a>
 
 
-      <a
-        (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); $event.preventDefault()"
-        [class.active]="activeTab() === TAB.MY_TOPS"
-        class="nav-pill"
-        href="#"
-      >
-        Mon top
-      </a>
     </div>
 
     <!-- Desktop user menu -->

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {Group, GroupMember, GroupRanking, GroupStatistics} from '../../../interface/group';
 import {LoadingComponent} from '../../Loading/loading';
 import {GroupResultsTabComponent} from '../GroupResultsTab/group-results-tab';
@@ -8,7 +9,7 @@ type DetailTab = 'results' | 'stats';
 
 @Component({
   selector: 'app-group-detail-modal',
-  imports: [LoadingComponent, GroupResultsTabComponent, GroupStatsTabComponent],
+  imports: [FormsModule, LoadingComponent, GroupResultsTabComponent, GroupStatsTabComponent],
   templateUrl: './group-detail-modal.html',
   styleUrl: './group-detail-modal.css',
 })
@@ -24,9 +25,12 @@ export class GroupDetailModalComponent {
   @Output() leave = new EventEmitter<Group>();
   @Output() copyCode = new EventEmitter<string>();
   @Output() removeMember = new EventEmitter<{group: Group, member: GroupMember}>();
+  @Output() renameGroup = new EventEmitter<{group: Group, name: string}>();
   @Output() songClick = new EventEmitter<number>();
 
   activeTab = signal<DetailTab>('results');
+  isRenaming = signal(false);
+  renameValue = '';
 
   setTab(tab: DetailTab): void {
     this.activeTab.set(tab);
@@ -34,6 +38,7 @@ export class GroupDetailModalComponent {
 
   onClose(): void {
     this.activeTab.set('results');
+    this.isRenaming.set(false);
     this.close.emit();
   }
 
@@ -65,5 +70,26 @@ export class GroupDetailModalComponent {
 
   getMemberCount(group: Group): number {
     return group.members?.length || 1;
+  }
+
+  startRename(group: Group): void {
+    this.renameValue = group.name;
+    this.isRenaming.set(true);
+  }
+
+  cancelRename(): void {
+    this.isRenaming.set(false);
+    this.renameValue = '';
+  }
+
+  submitRename(group: Group): void {
+    const trimmed = this.renameValue.trim();
+    if (!trimmed || trimmed === group.name) {
+      this.cancelRename();
+      return;
+    }
+    this.renameGroup.emit({group, name: trimmed});
+    this.isRenaming.set(false);
+    this.renameValue = '';
   }
 }

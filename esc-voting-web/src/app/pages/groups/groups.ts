@@ -339,6 +339,21 @@ export class Groups implements OnInit {
     this.removeMember(event.group, event.member);
   }
 
+  onRenameGroup(event: { group: Group, name: string }): void {
+    const {group, name} = event;
+    this.groupService.renameGroup(group.id, name).subscribe({
+      next: (updatedGroup) => {
+        this.groups.set(this.groups().map(g => g.id === updatedGroup.id ? updatedGroup : g));
+        this.selectedGroup.set(updatedGroup);
+        this.showToast(`Groupe renomme en "${updatedGroup.name}"`, 'success');
+      },
+      error: (err) => {
+        console.error('Erreur lors du renommage:', err);
+        this.showToast('Erreur lors du renommage du groupe', 'error');
+      }
+    });
+  }
+
   // Confirm modal methods
   showConfirmModal(config: {
     title: string;

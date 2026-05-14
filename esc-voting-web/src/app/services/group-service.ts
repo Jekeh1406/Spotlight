@@ -37,8 +37,12 @@ export class GroupService {
     return this.http.post<Group>(`${this.apiUrl}/groups/join`, request, {headers: this.getHeaders()});
   }
 
+  renameGroup(groupId: number, name: string): Observable<Group> {
+    return this.http.patch<Group>(`${this.apiUrl}/groups/${groupId}`, {name}, {headers: this.getHeaders()});
+  }
+
   leaveGroup(groupId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/groups/${groupId}/leave`, {headers: this.getHeaders()});
+    return this.http.post<void>(`${this.apiUrl}/groups/${groupId}/leave`, {}, {headers: this.getHeaders()});
   }
 
   removeMember(groupId: number, userId: number): Observable<void> {
