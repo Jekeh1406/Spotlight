@@ -108,6 +108,35 @@ final class VoteGroupController extends AbstractController
         return new JsonResponse(VoteGroupDto::fromEntity($group));
     }
 
+    #[Route('/{id}', name: 'update_group', methods: ['PATCH'])]
+    public function update(int $id, Request $request, VoteGroupRepository $groupRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $group = $groupRepository->find($id);
+        if (!$group) {
+            return new JsonResponse(['error' => 'Group not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($group->getOwner() !== $user) {
+            return new JsonResponse(['error' => 'Only the group owner can rename the group'], Response::HTTP_FORBIDDEN);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        if (empty($data['name']) || !trim($data['name'])) {
+            return new JsonResponse(['error' => 'Name is required'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $group->setName(trim($data['name']));
+        $em->flush();
+
+        return new JsonResponse(VoteGroupDto::fromEntity($group));
+    }
+
     #[Route('/{id}/leave', name: 'leave_group', methods: ['POST'])]
     public function leave(int $id, VoteGroupRepository $groupRepository, EntityManagerInterface $em): JsonResponse
     {
