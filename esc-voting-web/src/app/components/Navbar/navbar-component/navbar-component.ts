@@ -17,7 +17,7 @@ export class NavbarComponent {
 
   isUserMenuOpen = false;
   isMobileMenuOpen = false;
-  activeTab = signal<TAB>(TAB.MY_TOPSv);
+  activeTab = signal<TAB>(TAB.MY_TOPS);
   protected readonly TAB = TAB;
 
   constructor(
