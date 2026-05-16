@@ -33,7 +33,7 @@ export class Login implements OnInit {
     this.errorMessage.set(null);
     this.authService.login(this.loginFormGroup.value).subscribe({
       next: (response) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/my-tops']);
       },
       error: (error) => {
         if (error.status === 401 && error.error?.message === 'Invalid credentials.') {

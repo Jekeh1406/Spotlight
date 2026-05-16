@@ -52,7 +52,7 @@ export class Register implements OnInit {
     this.authService.register({firstName, lastName, email, password})
       .subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/my-tops']);
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Erreur lors de l\'inscription.';
