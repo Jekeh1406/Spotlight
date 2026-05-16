@@ -32,7 +32,7 @@ export class NavbarComponent {
     } else if (currentPath.includes('groups')) {
       this.activeTab.set(TAB.GROUPS);
     } else {
-      this.activeTab.set(TAB.VOTE);
+      this.activeTab.set(TAB.MY_TOPS);
     }
   }
 
