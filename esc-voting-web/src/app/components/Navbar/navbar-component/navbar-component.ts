@@ -38,7 +38,6 @@ export class NavbarComponent {
 
   navigate(route: string): void {
     const routeMap: { [key: string]: string } = {
-      'vote': '/home',
       'my-tops': '/my-tops',
       'groups': '/groups',
       'global-ranking': '/global-ranking',
