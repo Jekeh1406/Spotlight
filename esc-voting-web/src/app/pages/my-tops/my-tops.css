@@ -472,7 +472,7 @@
 
 .unvoted-item {
   display: grid;
-  grid-template-columns: 50px 1fr auto auto;
+  grid-template-columns: 28px 50px 1fr auto auto;
   align-items: center;
   gap: 1.25rem;
   padding: 1rem 1.25rem;
@@ -996,7 +996,7 @@
   }
 
   .unvoted-item {
-    grid-template-columns: 40px 1fr auto;
+    grid-template-columns: 28px 40px 1fr auto;
     gap: 1rem;
     padding: 0.85rem 1rem;
   }
