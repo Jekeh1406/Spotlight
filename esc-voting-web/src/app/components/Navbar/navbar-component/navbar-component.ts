@@ -25,7 +25,6 @@ export class NavbarComponent {
     private authService: AuthService,
     protected userService: UserService,
   ) {
-    // Set active tab based on current route
     const currentPath = this.router.url;
     if (currentPath.includes('my-tops')) {
       this.activeTab.set(TAB.MY_TOPS);
