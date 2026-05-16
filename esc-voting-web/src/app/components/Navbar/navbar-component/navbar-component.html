@@ -71,6 +71,15 @@
 
   <div class="mobile-menu-nav">
     <a
+      (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); closeMobileMenu(); $event.preventDefault()"
+      [class.active]="activeTab() === TAB.MY_TOPS"
+      class="mobile-nav-item"
+      href="#"
+    >
+      <span class="mobile-nav-icon">🏆</span>
+      <span>Mon top</span>
+    </a>
+    <a
       (click)="navigate('groups'); setActiveTab(TAB.GROUPS); closeMobileMenu(); $event.preventDefault()"
       [class.active]="activeTab() === TAB.GROUPS"
       class="mobile-nav-item"
@@ -80,15 +89,7 @@
       <span>Groupes</span>
     </a>
 
-    <a
-      (click)="navigate('my-tops'); setActiveTab(TAB.MY_TOPS); closeMobileMenu(); $event.preventDefault()"
-      [class.active]="activeTab() === TAB.MY_TOPS"
-      class="mobile-nav-item"
-      href="#"
-    >
-      <span class="mobile-nav-icon">🏆</span>
-      <span>Mon top</span>
-    </a>
+
   </div>
 
   <div class="mobile-menu-divider"></div>
