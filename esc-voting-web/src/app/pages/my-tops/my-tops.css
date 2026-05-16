@@ -494,6 +494,15 @@
   }
 }
 
+.unvoted-order {
+  width: 28px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
 .unvoted-flag {
   width: 45px;
   height: auto;
