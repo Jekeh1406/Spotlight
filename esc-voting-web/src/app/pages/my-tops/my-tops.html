@@ -128,13 +128,15 @@
 
       <div class="ranking-list">
         @for (song of rankedSongs(); track song.id) {
-          <div (click)="openModal(song)" [class.gold]="song.rank === 1" [class.silver]="song.rank === 2" [class.bronze]="song.rank === 3" [class.top-3]="song.rank <= 3" class="ranking-item clickable">
+          <div (click)="openModal(song)" [class.bronze]="song.rank === 3" [class.gold]="song.rank === 1"
+               [class.silver]="song.rank === 2" [class.top-3]="song.rank <= 3" class="ranking-item clickable">
             <div [class.bronze]="song.rank === 3" [class.gold]="song.rank === 1" [class.silver]="song.rank === 2"
                  class="ranking-position">
               {{ song.rank }}
             </div>
             <img [alt]="song.country.name" [src]="song.country.flag | countryFlag" class="ranking-flag">
             <div class="ranking-info">
+              <div class="ranking-artist">{{ song.country.name.toUpperCase() }}</div>
               <div class="ranking-artist">{{ song.artist }}</div>
               <div class="ranking-song">"{{ song.title }}"</div>
             </div>
@@ -174,6 +176,7 @@
           <div (click)="openModal(song)" class="unvoted-item">
             <img [alt]="song.country.name" [src]="song.country.flag | countryFlag" class="unvoted-flag">
             <div class="unvoted-info">
+              <div class="unvoted-artist">{{ song.country.name.toUpperCase() }}</div>
               <div class="unvoted-artist">{{ song.artist }}</div>
               <div class="unvoted-song">"{{ song.title }}"</div>
             </div>
