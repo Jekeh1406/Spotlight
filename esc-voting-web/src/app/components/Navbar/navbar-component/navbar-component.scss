@@ -418,6 +418,10 @@
     padding: 0.5rem 1rem;
   }
 
+  .nav-content {
+    justify-content: flex-end;
+  }
+
   .desktop-only {
     display: none !important;
   }
