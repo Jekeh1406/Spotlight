@@ -71,16 +71,6 @@
 
   <div class="mobile-menu-nav">
     <a
-      (click)="navigate('vote'); setActiveTab(TAB.VOTE); closeMobileMenu(); $event.preventDefault()"
-      [class.active]="activeTab() === TAB.VOTE"
-      class="mobile-nav-item"
-      href="#"
-    >
-      <span class="mobile-nav-icon">🗳️</span>
-      <span>Voter</span>
-    </a>
-
-    <a
       (click)="navigate('groups'); setActiveTab(TAB.GROUPS); closeMobileMenu(); $event.preventDefault()"
       [class.active]="activeTab() === TAB.GROUPS"
       class="mobile-nav-item"
