@@ -249,6 +249,7 @@ final class VoteGroupController extends AbstractController
                 'title' => $song->getTitle(),
                 'artist' => $song->getArtist(),
                 'country' => $song->getCountry()->getName(),
+                'flag' => $song->getCountry()->getFlag(),
                 'imageUrl' => $song->getImageUrl(),
                 'score' => round($totalScore / $voteCount, 2),
                 'voteCount' => $voteCount,

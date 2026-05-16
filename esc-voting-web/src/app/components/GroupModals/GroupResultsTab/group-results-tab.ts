@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {GroupRanking} from '../../../interface/group';
+import {CountryFlagPipe} from '../../../pipes/country-flag.pipe';
 
 @Component({
   selector: 'app-group-results-tab',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, CountryFlagPipe],
   templateUrl: './group-results-tab.html',
   styleUrl: './group-results-tab.css',
 })

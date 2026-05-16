@@ -8,7 +8,7 @@
         <!-- Song header -->
         <div class="song-votes-header">
           @if (data.song.imageUrl) {
-            <img [src]="data.song.imageUrl" [alt]="data.song.artist" class="song-votes-image">
+            <img [alt]="data.song.artist" [src]="data.song.imageUrl" class="song-votes-image">
           } @else {
             <div class="song-votes-icon">🎵</div>
           }

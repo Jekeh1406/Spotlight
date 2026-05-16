@@ -24,7 +24,7 @@
 
 .result-item {
   display: grid;
-  grid-template-columns: 40px 80px 1fr 80px 20px;
+  grid-template-columns: 40px 45px 1fr 80px 20px;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
@@ -83,12 +83,20 @@
   color: #A78BFA;
 }
 
-.result-country {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.result-flag {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.result-country-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.1rem;
 }
 
 .result-rank {
@@ -150,19 +158,15 @@
 /* Responsive */
 @media (max-width: 768px) {
   .result-item {
-    grid-template-columns: 35px 60px 1fr 60px 15px;
+    grid-template-columns: 35px 45px 1fr 60px 15px;
   }
 }
 
 @media (max-width: 480px) {
   .result-item {
-    grid-template-columns: 30px 1fr 50px 15px;
+    grid-template-columns: 30px 45px 1fr 50px 15px;
     gap: 0.5rem;
     padding: 0.75rem;
-  }
-
-  .result-country {
-    display: none;
   }
 
   .result-rank {
