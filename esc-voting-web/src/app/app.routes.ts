@@ -17,11 +17,6 @@ export const routes: Routes = [
       import('./pages/register/register').then(m => m.Register),
   },
   {
-    path: 'home',
-    loadComponent: () =>
-      import('./pages/my-tops/my-tops').then(m => m.MyTops),
-  },
-  {
     path: 'my-tops',
     loadComponent: () =>
       import('./pages/my-tops/my-tops').then(m => m.MyTops),
